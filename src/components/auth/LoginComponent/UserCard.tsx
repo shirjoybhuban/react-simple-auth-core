@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../context/AuthContext';
 
-const UserCard = () => {
-  return <div>UserCard</div>;
+const UserCard: React.FC = () => {
+  const auth = useContext(AuthContext);
+
+  return (
+    <div>
+      {auth?.user?.name ? (
+        <h1>{auth?.user?.name}!</h1>
+      ) : (
+        <h2></h2>
+      )}
+    </div>
+  );
 };
 
 export default UserCard;
