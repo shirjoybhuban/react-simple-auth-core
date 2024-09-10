@@ -10,7 +10,7 @@ export interface Errors {
 
 export interface UserContextType {
     user: any;
-    handleUser: (username: any) => void;
+    handleUser: (userData: any) => void;
     logout: () => void;
   }
   
