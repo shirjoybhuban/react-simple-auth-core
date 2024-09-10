@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }: any) => {
   const [isHydrate, setIsHydrate] = useState(false);
 
   useEffect(() => {
+    // Hydrate the state from localstorage
     let data : string | null = localStorage.getItem('auth-user');
     if(data && data?.length > 0){
       setUser(JSON.parse(data));
