@@ -1,12 +1,13 @@
 // src/LoginForm.tsx
 import React, { useState, ChangeEvent, FormEvent, useContext } from 'react';
-import { Errors, UserData } from '../../../types/authType';
 //Import local component Style
-import '../LoginComponent/style.css';
+import '../style.css';
 import { AuthContext } from '../../../context/AuthContext';
+import { Errors, UserData } from '../../../types/authType';
 
 const LoginForm: React.FC = () => {
   const auth = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
     // Form data will save in this state
     const [userData, setUserData] = useState<UserData>({
         username: '',
@@ -43,10 +44,15 @@ const LoginForm: React.FC = () => {
         if (validate()) {
           let username = userData.username;
           let password = userData.password;
-          auth?.handleUser({username, password });
-            console.log('Login form submitted');
+          setIsLoading(true)
+          //Mocking API
+          setTimeout(() => {
+            setIsLoading(false);
+            auth?.handleUser({username, password });
             // Reset form
             setUserData({ username: '', password: '' });
+          }, 1000);
+
         }
     };
 
@@ -60,6 +66,7 @@ const LoginForm: React.FC = () => {
                         type="text"
                         id="username"
                         name="username"
+                        placeholder="Enter you username"
                         value={userData.username}
                         onChange={handleInputChange}
                     />
@@ -71,12 +78,13 @@ const LoginForm: React.FC = () => {
                         type="password"
                         id="password"
                         name="password"
+                        placeholder="Enter you password"
                         value={userData.password}
                         onChange={handleInputChange}
                     />
                     {errors.password && <p className="error">{errors.password}</p>}
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit" disabled={isLoading}>{isLoading ? "Logging in..." : "Login"}</button>
             </form>
         </div>
     );

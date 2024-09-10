@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
+import '../style.css';
 import { AuthContext } from '../../../context/AuthContext';
-import '../LoginComponent/style.css';
 
 const UserCard: React.FC = () => {
   const auth = useContext(AuthContext);
@@ -16,7 +16,7 @@ const UserCard: React.FC = () => {
       </div>
     );
   }
-  
+
   return (
     <div className='card'>
       <img src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/10.png" alt="user" />
